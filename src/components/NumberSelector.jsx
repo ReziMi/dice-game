@@ -1,58 +1,62 @@
-import React, { useState } from 'react'
+import React from 'react';
 import styled from 'styled-components';
 
-function NumberSelector() {
+const NumberSelector = ({ setError, error, selectedNumber, setSelectedNumber }) => {
+    const arrNumber = [1, 2, 3, 4, 5, 6];
 
-    const arrNumber = [1,2,3,4,5,6];
-    const [selectedNumber, setSelectedNumber] = useState();
+    const numberSelectorHandler = (value)=>{
+        setSelectedNumber(value);
+        setError("")
+    }
 
-  return (
-    <NumberSelectorContainer>
-        <div className='flex'>
-            {
-                arrNumber.map((value,i)=>(
-                    <Box 
-                    isSelected={
-                        value==selectedNumber
-                    }
-                    key={i} onClick={() => setSelectedNumber(value)}>{value}</Box>
-                ))
-            }
-        </div>
-        <p>Selected Number</p>
-
-
-    </NumberSelectorContainer>
-  );
+    return (
+        <NumberSelectorContainer>
+            <p className='error'>{error}</p>
+            <div className='flex'>
+                {
+                    arrNumber.map((value, i) => (
+                        <Box
+                            isSelected={value === selectedNumber}
+                            key={i} onClick={()=>numberSelectorHandler(value)}>{value}
+                        </Box>
+                    ))
+                }
+            </div>
+            <p>Selected Number</p>
+        </NumberSelectorContainer>
+    );
 };
 
-export default NumberSelector
+export default NumberSelector;
 
 const NumberSelectorContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items: end;
 
-    .flex{
+    .flex {
         display: flex;
         gap: 24px;
+        cursor: pointer;
     }
 
-    p{
+    p {
         font-size: 24px;
-        font-weight: 700px;
+        font-weight: 700;
     }
-    
-`
+    .error{
+        color: red;
+    }
+`;
 
 const Box = styled.div`
-    height:72px;
+    height: 72px;
     width: 72px;
     border: 1px solid black;
     display: grid;
     place-items: center;
-    font-size:24px;
-    font-weight: 700px;
-    background-color: ${(props)=>props.isSelected ? 'black' : 'white'};
-    color: ${(props)=>props.isSelected ? 'white' : 'black'};
-`
+    font-size: 24px;
+    font-weight: 700;
+    background-color: ${(props) => props.isSelected ? 'black' : 'white'};
+    color: ${(props) => props.isSelected ? 'white' : 'black'};
+`;
