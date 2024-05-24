@@ -14,7 +14,7 @@ export default TotalScore
 
 const ScoreContainer = styled.div`
     max-width:200px;
-    background-color: red;
+    /* background-color: red; */
     text-align: center;
     h1{
         font-size: 100px;
